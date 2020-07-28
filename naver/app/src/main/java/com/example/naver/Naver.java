@@ -9,18 +9,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Naver {
-    public static void connect() {
+    public static String connect(int display, String query, String url) { // 매개변수의 값들을 사용자의 설정으로 넘겨줌
         String clientId = "NuPlpM4SsiY_YdyGCzEi"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "xLUzlgqKaI"; //애플리케이션 클라이언트 시크릿값"
 
         String text = null;
         try {
-            text = URLEncoder.encode("그린팩토리", "UTF-8");
+            text = URLEncoder.encode(query, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
-        String apiURL = "https://openapi.naver.com/v1/search/news.json?query=" + text;    // json 결과
+        String apiURL = url + "?query=" + text; // 현재 메소드의 매개변수에 Strinng형 url을 추가하고 ?query= 앞의 링크를 지움
+        apiURL += "&display=" + display; // json 결과. text뿐 아니라 display값도 받음
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
         Map<String, String> requestHeaders = new HashMap<>();
@@ -28,7 +29,8 @@ public class Naver {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
-        System.out.println(responseBody);
+        //System.out.println(responseBody);
+        return responseBody;
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){

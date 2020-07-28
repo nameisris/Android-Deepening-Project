@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="검색"
+        android:id="@+id/search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"/>
+    <item android:title="뉴스검색"
+        android:id="@+id/news"
+        app:showAsAction="never"/>
+    <item android:title="카페검색"
+        android:id="@+id/cafe"
+        app:showAsAction="never"/>
+    <item android:title="블로그검색"
+        android:id="@+id/blog"
+        app:showAsAction="never"/>
+    <item android:title="도서검색"
+        android:id="@+id/book"
+        app:showAsAction="never"/>
+</menu>

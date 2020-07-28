@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".BookActivity">
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
@@ -16,8 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="20sp"
         android:src="@drawable/ic_more"
-        android:backgroundTint="#A5D7FF"
-        app:borderWidth="0sp"/>
+        android:layout_margin="20sp"
+        android:backgroundTint="#9FF4FF"/>
 </RelativeLayout>
