@@ -192,24 +192,27 @@ public class BookActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish(); // 아이템을 하나 선택했으므로 일단 finish()를 해줌
         Intent intent = new Intent(BookActivity.this, MainActivity.class);
         switch(item.getItemId()){
             case android.R.id.home: // 백버튼일 경우
-                finish();
                 break;
             case R.id.news:
                 intent.putExtra("url", "https://openapi.naver.com/v1/search/news.json");
+                intent.putExtra("title", "뉴스검색");
                 break;
             case R.id.cafe:
                 intent.putExtra("url", "https://openapi.naver.com/v1/search/cafearticle.json");
+                intent.putExtra("title", "카페검색");
                 break;
             case R.id.blog:
                 intent.putExtra("url", "https://openapi.naver.com/v1/search/blog.json");
+                intent.putExtra("title", "블로그검색");
                 break;
             case R.id.book:
                 break;
         }
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, 0); // 메인액티비티의 onCreate 메소드로 이동 (finish()를 했을 경우 onActivityResult 메소드로 이동?)
         return super.onOptionsItemSelected(item);
     }
 }

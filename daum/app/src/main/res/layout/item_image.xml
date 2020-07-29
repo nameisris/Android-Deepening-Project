@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EFD5D5"
+    android:orientation="vertical"
+    android:padding="10sp">
+    <ImageView
+        android:id="@+id/thumb"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사이트명"
+        android:textSize="20sp"
+        android:layout_toRightOf="@id/thumb"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20sp"/>
+</RelativeLayout>

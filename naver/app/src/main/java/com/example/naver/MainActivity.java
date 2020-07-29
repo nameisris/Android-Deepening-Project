@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent();
-
-
-
-        출처: http://zeany.net/54 [소소한 IT 이야기]
+        Intent intent = getIntent(); // BookActivity에서 intent를 통해 메인액티비티로 이동해왔을 경우
+        if(intent.getStringExtra("url")!=null){
+            url = intent.getStringExtra("url");
+            getSupportActionBar().setTitle(intent.getStringExtra("title"));
+        }
 
         new NaverThread().execute();
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) { // doInBackground 메소드의 리턴결과가 s로 들어감
-            parseJSON(s);
+            parserJSON(s);
             // System.out.println("array 사이즈:" + array.size());
             ad = new MyAdapter(); // 어댑터 생성
             list.setAdapter(ad); // list에 어댑터 ad를 set
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 결과 파싱
     // 결과를 파싱하여 분석하여
-    public void parseJSON(String result){ // result를 받아 파싱해주어 ArrayList에 넣어주기 위한 메소드
+    public void parserJSON(String result){ // result를 받아 파싱해주어 ArrayList에 넣어주기 위한 메소드
         array = new ArrayList<HashMap<String, String>>();
         try{
             JSONArray jArray = new JSONObject(result).getJSONArray("items"); // items의 값을 가져와 jarray에 넣어줌
@@ -211,13 +211,5 @@ public class MainActivity extends AppCompatActivity {
         display =  5; // 검색결과 5개로 설정
         new NaverThread().execute(); // 스레드를 다시 실행 (새로 검색하기 위해)
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == 0){
-
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }
