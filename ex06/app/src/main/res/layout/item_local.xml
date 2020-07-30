@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E3F3FA"
+    android:padding="10sp"
+    android:layout_margin="5sp"
+    android:elevation="3sp">
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장소명"/>
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주소명"
+        android:layout_below="@id/place_name"/>
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전화번호"
+        android:layout_below="@id/address_name"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_local"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/place_name"/>
+</RelativeLayout>
