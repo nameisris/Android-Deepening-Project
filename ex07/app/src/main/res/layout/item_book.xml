@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E3F3FA"
+    android:padding="10sp"
+    android:layout_margin="5sp"
+    android:elevation="3sp">
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginRight="20sp"/>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제목이 들어갑니다............"
+        android:layout_toRightOf="@id/thumbnail"/>
+    <TextView
+        android:id="@+id/publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="출판사 들어갑니다............"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_below="@id/title"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가격이 들어갑니다............"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_below="@id/publisher"/>
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E3F3FA"
+    android:padding="10sp"
+    android:layout_margin="5sp"
+    android:orientation="vertical"
+    android:elevation="3sp"
+    android:id="@+id/layout">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제목이 들어갑니다............"/>
+    <TextView
+        android:id="@+id/link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL주소가 들어갑니다............"/>
+</LinearLayout>

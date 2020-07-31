@@ -1,4 +1,4 @@
-package com.example.ex06;
+package com.example.ex07;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,7 +11,7 @@ public class Kakao {
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
-            con.setRequestProperty("Authorization", "KakaoAK 4c9947b8b0448265ca15036c39a7fa4e");
+            con.setRequestProperty("Authorization", "KakaoAK 9bc25abcd67e769aa66f6fd7e0de022c");
             int responseCode = con.getResponseCode();
             BufferedReader br;
 
