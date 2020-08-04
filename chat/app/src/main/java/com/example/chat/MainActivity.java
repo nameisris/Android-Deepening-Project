@@ -1,4 +1,4 @@
-package com.example.memo;
+package com.example.chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,22 +19,24 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     EditText edtEmail, edtPassword;
     Button btnRegister, btnLogin, btnCancel;
-    FirebaseAuth mAuth; // 파이어베이스 사용을 위해 선언
+    String strEmail, strPassword; // 이메일과 비밀번호가 들어갈 String 변수
+    FirebaseAuth mAuth; // 유저 인증을 위해 필요
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance(); // 파이어베이스 인증에 대한
-
         // 액션바
         getSupportActionBar().setTitle("로그인");
 
-        // 아이디 읽어오기
+        // 인스턴스 가져오기
+        mAuth = FirebaseAuth.getInstance();
+
+        // 아이디
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
-        btnRegister =findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
         btnCancel = findViewById(R.id.btnCancel);
 
@@ -42,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strEmail = edtEmail.getText().toString(); // @ 포함되어야 함
-                String strPassword = edtPassword.getText().toString(); // 패스워드는 8자리 이상
-                if(strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지
+                strEmail = edtEmail.getText().toString();
+                strPassword = edtPassword.getText().toString();
+                if (strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지
                     Toast.makeText(MainActivity.this,"이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
                 }
-                else if(strPassword.length() < 8){ // 패스워드가 8자리보자 작다면
+                else if (strPassword.length() < 8){ // 패스워드가 8자리보자 작다면
                     Toast.makeText(MainActivity.this,"비밀번호를 8자리 이상 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -60,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strEmail = edtEmail.getText().toString(); // @ 포함되어야 함
-                String strPassword = edtPassword.getText().toString(); // 패스워드는 8자리 이상
-                if(strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지 (0번째보다 작으면 = @가 없다면)
+                strEmail = edtEmail.getText().toString();
+                strPassword = edtPassword.getText().toString();
+                if (strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지
                     Toast.makeText(MainActivity.this,"이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
                 }
-                else if(strPassword.length() < 8){ // 패스워드의 길이가 8자리보자 작다면
+                else if (strPassword.length() < 8){ // 패스워드가 8자리보자 작다면
                     Toast.makeText(MainActivity.this,"비밀번호를 8자리 이상 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -73,39 +75,49 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // btnCancel 클릭 리스너
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtEmail.setText("");
+                edtPassword.setText("");
+                Toast.makeText(MainActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    // 가입 메소드
-    public void registerUser(String strEmail, String strPassword){ // strEmail과 strPassword를 사용하여 유저를 생성
+    // 유저 가입 메소드
+    public void registerUser(String strEmail, String strPassword) {
         mAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            // strEmail과 strPassword를 이용해 유저 생성
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Toast.makeText(MainActivity.this,"등록 성공", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    FirebaseUser user = mAuth.getCurrentUser(); // 인스턴스를 가져온 mAuth로부터 현재 유저를 가져옴
+                    Toast.makeText(MainActivity.this, "사용자 등록 성공", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    Toast.makeText(MainActivity.this,"등록 실패", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(MainActivity.this, "사용자 등록 실패", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    // 로그인 메소드
-    public void loginUser(final String strEmail, String strPassword){ // strEmail과 strPassword를 사용하여 유저 로그인
+    // 유저 로그인 메소드
+    public void loginUser(String strEmail, String strPassword) {
         mAuth.signInWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            // strEmail과 strPassword를 이용해 유저 생성
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this,"로그인 성공", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Intent intent = new Intent(MainActivity.this, MemoActivity.class);
-                    intent.putExtra("email", strEmail);
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = mAuth.getCurrentUser(); // 인스턴스를 가져온 mAuth로부터 현재 유저를 가져옴
+                    Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                     startActivity(intent);
-                    // finish();
                 }
-                else{
-                    Toast.makeText(MainActivity.this,"로그인 실패", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(MainActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                 }
             }
         });
