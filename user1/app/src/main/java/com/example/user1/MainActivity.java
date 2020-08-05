@@ -125,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
         else if(requestCode == 2 && resultCode == RESULT_OK){
             Toast.makeText(this, "수정 완료", Toast.LENGTH_SHORT).show();
         }
+        else if(requestCode == 2 && resultCode == 3){
+            Toast.makeText(this, "삭제 완료", Toast.LENGTH_SHORT).show();
+        }
+        // 변경된 데이터베이스의 테이블 값에 대해 어댑터에 알림
         Call<List<UserVO>> call = remoteService.listUser();
         call.enqueue(new Callback<List<UserVO>>() { // 앞서 만든 요청을 수행
             @Override

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +27,7 @@ public class ReadActivity extends AppCompatActivity {
     Retrofit retrofit;
     RemoteService remoteService;
     EditText edtId, edtName, edtPassword;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class ReadActivity extends AppCompatActivity {
         // API 인터페이스 생성
         remoteService = retrofit.create(RemoteService.class);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         Call<UserVO> call  = remoteService.readUser((intent.getStringExtra("id")));
         call.enqueue(new Callback<UserVO>() {
             @Override
@@ -56,9 +58,7 @@ public class ReadActivity extends AppCompatActivity {
                 edtId.setEnabled(false); // 해당 EditText창의 텍스트를 건들지 못하게 함 (수정 불가능)
                 edtName.setText(userVO.getName());
                 edtPassword.setText(userVO.getPassword());
-
             }
-
             @Override
             public void onFailure(Call<UserVO> call, Throwable t) {
 
@@ -108,15 +108,40 @@ public class ReadActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.itemDelete:
+                AlertDialog.Builder box = new AlertDialog.Builder(this);
+                box.setTitle("질의");
+                box.setMessage("삭제하시겠습니까?");
+                box.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Call call = remoteService.deleteUser(intent.getStringExtra("id"));
+                        call.enqueue(new Callback() {
+                            @Override
+                            public void onResponse(Call call, Response response) {
+                                setResult(3);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
+                box.setNegativeButton("아니오", null);
+                box.show();
         }
         return super.onOptionsItemSelected(item);
     }
 
     // menu_read.xml 메뉴 등록
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_read, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 }
