@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20sp"
+    android:layout_margin="10sp"
+    android:background="#3F5185">
+    <TextView
+        android:id="@+id/txtId"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:text="아이디"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"/>
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:text="아이디"
+        android:textSize="15sp"
+        android:layout_toRightOf="@id/txtId"
+        android:textColor="#FFFFFF"/>
+    <ImageView
+        android:id="@+id/btnRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_edit"/>
+</RelativeLayout>

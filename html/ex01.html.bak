@@ -12,8 +12,14 @@
 
 	p {background-color:yellow;}
   </style>
+  <script>
+  	function print(){
+		alert("안녕하세요!");
+	}
+  </script>
  </head>
  <body>
+	<button onClick="print();">클릭하세요!</button>
 	<h1 id="header1">What is Lorem Ipsum?</h1>
 	<img src="a.png"/>
 	<br>
