@@ -1,6 +1,8 @@
-package com.example.chat;
+package com.example.chatprogram;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,12 +18,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
+    // FirebaseStorage mStorage;
     EditText edtEmail, edtPassword;
     Button btnRegister, btnLogin, btnCancel;
-    String strEmail, strPassword; // 이메일과 비밀번호가 들어갈 String 변수
-    FirebaseAuth mAuth; // 유저 인증을 위해 필요
+    String strEmail, strPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 액션바
-        getSupportActionBar().setTitle("로그인");
+        getSupportActionBar().setTitle("채팅 프로그램");
 
         // 인스턴스 가져오기
-        mAuth = FirebaseAuth.getInstance();
+        mAuth =  FirebaseAuth.getInstance();
 
-        // 아이디
+        // 아이디 가져오기
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnRegister = findViewById(R.id.btnRegister);
@@ -45,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivityForResult(intent, 1);
+
+                /*
                 strEmail = edtEmail.getText().toString();
                 strPassword = edtPassword.getText().toString();
                 if (strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지
@@ -56,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     registerUser(strEmail, strPassword);
                 }
+                */
             }
         });
 
@@ -68,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 if (strEmail.indexOf('@') < 0) { // 이메일에 @가 index 중에 몇 번째에 있는지
                     Toast.makeText(MainActivity.this,"이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
                 }
-                else if (strPassword.length() < 8){ // 패스워드가 8자리보자 작다면
+                else if (strPassword.length() < 8) { // 패스워드가 8자리보자 작다면
                     Toast.makeText(MainActivity.this,"비밀번호를 8자리 이상 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -81,15 +91,16 @@ public class MainActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                // edtEmail, edtPassword 텍스트 공백으롯 설정
                 edtEmail.setText("");
                 edtPassword.setText("");
-                Toast.makeText(MainActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     // 유저 가입 메소드
-    public void registerUser(String strEmail, String strPassword) {
+    public void registerUser(String strName, String strEmail, String strPassword, String strNumber) {
         mAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             // strEmail과 strPassword를 이용해 유저 생성
             @Override
@@ -114,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser(); // 인스턴스를 가져온 mAuth로부터 현재 유저를 가져옴
-                    Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
                 }
                 else {
@@ -122,5 +133,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 1 && requestCode == RESULT_OK) {
+            registerUser(data.getStringExtra("name"), data.getStringExtra("email"), data.getStringExtra("password"), data.getStringExtra("number"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
