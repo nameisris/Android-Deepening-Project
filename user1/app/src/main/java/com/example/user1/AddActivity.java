@@ -25,7 +25,6 @@ public class AddActivity extends AppCompatActivity {
     Retrofit retrofit;
     RemoteService remoteService;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

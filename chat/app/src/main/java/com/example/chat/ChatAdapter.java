@@ -41,7 +41,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         LinearLayout.LayoutParams prmDate = (LinearLayout.LayoutParams)holder.txtDate.getLayoutParams();
         LinearLayout.LayoutParams prmEmail = (LinearLayout.LayoutParams)holder.txtEmail.getLayoutParams();
         String email = arrayChat.get(position).getEmail();
-        // arrayChat으로부터 받아온 이메일 데이터 (모든 채팅내용이이들어간 chat의 데이터가 들어있는 arrayChat)
+        // arrayChat으로부터 받아온 이메일 데이터 (모든 채팅내용이 들어간 chat의 데이터가 들어있는 arrayChat)
 
         // 아래의 조건문에 따라 TextView의 TextColor와 Gravity를 설정
         // (채팅을 한 유저에 따라 채팅창의 위치와 글자색을 설정)

@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:orientation="vertical"
     android:gravity="center">
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/profileImage"
         android:layout_width="200sp"
         android:layout_height="200sp"
-        android:background="#C8CFF4"/>
-    <LinearLayout
+        android:background="#C8CFF4"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:id="@+id/imgCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp">
-        <ImageView
-            android:id="@+id/imgCamera"
-            android:layout_width="wrap_content"
+        android:src="@drawable/ic_camera"
+        android:layout_margin="5sp"
+        android:layout_alignBottom="@+id/profileImage"
+        android:layout_alignRight="@id/profileImage"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/profileImage"
+        android:gravity="center"
+        android:layout_margin="10sp">
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="300sp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_camera"
-            android:layout_margin="5sp"/>
-        <ImageView
-            android:id="@+id/imgPhoto"
-            android:layout_width="wrap_content"
+            android:hint="이름"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"/>
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="300sp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_photo"
-            android:layout_margin="5sp"/>
+            android:hint="이메일"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"/>
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:layout_margin="10sp"/>
+        <EditText
+            android:id="@+id/edtNumber"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:hint="전화번호"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:layout_margin="10sp"/>
+        <Button
+            android:id="@+id/btnJoin"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:text="계정생성"/>
     </LinearLayout>
-    <EditText
-        android:id="@+id/edtName"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:hint="이름"
-        android:layout_gravity="center"
-        android:layout_margin="10sp"/>
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:hint="이메일"
-        android:layout_gravity="center"
-        android:layout_margin="10sp"/>
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호"
-        android:layout_gravity="center"
-        android:inputType="numberPassword"
-        android:layout_margin="10sp"/>
-    <EditText
-        android:id="@+id/edtNumber"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:hint="전화번호"
-        android:layout_gravity="center"
-        android:inputType="number"
-        android:layout_margin="10sp"/>
-    <Button
-        android:id="@+id/btnJoin"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:text="계정생성"/>
-</LinearLayout>
+
+</RelativeLayout>

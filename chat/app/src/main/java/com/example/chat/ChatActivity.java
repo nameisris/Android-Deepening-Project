@@ -109,7 +109,7 @@ public class ChatActivity extends AppCompatActivity {
                     // meRef의 저장 경로 설정
                     myRef = database.getReference("chats").child(strDate); // "chats"밑에 strDate로 경로를 생성함과 동시에 저장 경로로 설정
                     // 저장 경로가 설정된 myRef를 이용해 데이터 저장
-                    myRef.setValue(chat); // "chats"의 날짜 밑에 chat을 넣어줌
+                    myRef.setValue(chat); // "chats" 밑의 날짜 밑에 chat을 넣어줌 (chat은 email, content, wdate가 set되어있음)
                     edtContent.setText(""); // 내용 입력창을 공백으로 set
                 }
             }

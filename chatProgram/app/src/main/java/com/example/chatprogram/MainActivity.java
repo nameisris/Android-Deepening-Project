@@ -22,7 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
-    FirebaseDatabase mDatabase;
+    // FirebaseDatabase mDatabase;
     // FirebaseStorage mStorage;
     EditText edtEmail, edtPassword;
     Button btnRegister, btnLogin, btnCancel;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
 
                 /*
                 strEmail = edtEmail.getText().toString();
@@ -99,23 +99,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 유저 가입 메소드
-    public void registerUser(String strName, String strEmail, String strPassword, String strNumber) {
-        mAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            // strEmail과 strPassword를 이용해 유저 생성
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser(); // 인스턴스를 가져온 mAuth로부터 현재 유저를 가져옴
-                    Toast.makeText(MainActivity.this, "사용자 등록 성공", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "사용자 등록 실패", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
     // 유저 로그인 메소드
     public void loginUser(String strEmail, String strPassword) {
         mAuth.signInWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -133,13 +116,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == 1 && requestCode == RESULT_OK) {
-            registerUser(data.getStringExtra("name"), data.getStringExtra("email"), data.getStringExtra("password"), data.getStringExtra("number"));
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }
