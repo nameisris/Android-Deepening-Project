@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:layout_margin="10sp"
+        android:elevation="5sp"
+        android:background="#F8F3C9">
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/currentUserImage"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:src="@drawable/ic_person"/>
+        <TextView
+            android:id="@+id/txtCurrentUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_margin="20sp"
+            android:layout_toRightOf="@id/currentUserImage"/>
+    </RelativeLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="연락처 리스트 창"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20sp"
-        android:src="@drawable/ic_add"
-        android:backgroundTint="#FFE200"/>
-</RelativeLayout>
+        android:text="친구"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_margin="10sp"
+        android:padding="10sp"
+        android:background="#DAD9D6"/>
+    <ListView
+        android:id="@+id/listUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="10sp"/>
+</LinearLayout>

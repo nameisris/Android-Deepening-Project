@@ -10,7 +10,7 @@
         android:id="@+id/profileImage"
         android:layout_width="200sp"
         android:layout_height="200sp"
-        android:background="#C8CFF4"
+        android:src="@drawable/ic_person"
         android:layout_centerHorizontal="true"/>
     <ImageView
         android:id="@+id/imgCamera"

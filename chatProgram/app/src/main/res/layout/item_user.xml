@@ -17,23 +17,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이름"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="5sp"
         android:layout_toRightOf="@id/image"/>
     <TextView
-        android:id="@+id/lastMessage"
+        android:id="@+id/txtNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마지막 메세지"
+        android:text="번호"
         android:layout_toRightOf="@id/image"
         android:layout_below="@id/txtName"
-        android:layout_margin="10sp"/>
-    <TextView
-        android:id="@+id/timeStamp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="5sp"/>
+    <ImageView
+        android:id="@+id/btnCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_call"
         android:layout_alignParentRight="true"
-        android:text="시각"
-        android:layout_marginTop="20sp"/>
+        android:padding="20sp"/>
 </RelativeLayout>

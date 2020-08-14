@@ -37,7 +37,7 @@ public class ReadActivity extends AppCompatActivity {
         // Retrofit 정의
         retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         remoteService = retrofit.create(RemoteService.class);
-        Call<ProductVO> call = remoteService.readProdut(intent.getStringExtra("code"));
+        Call<ProductVO> call = remoteService.readProduct(intent.getStringExtra("code"));
         call.enqueue(new Callback<ProductVO>() {
             @Override
             public void onResponse(Call<ProductVO> call, Response<ProductVO> response) {

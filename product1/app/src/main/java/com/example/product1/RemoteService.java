@@ -21,7 +21,7 @@ public interface RemoteService {
             @Query("query") String query);
 
     @GET("read.jsp")
-    Call<ProductVO> readProdut(@Query("code") String code);
+    Call<ProductVO> readProduct(@Query("code") String code);
 
     @Multipart
     @POST("insert.jsp")

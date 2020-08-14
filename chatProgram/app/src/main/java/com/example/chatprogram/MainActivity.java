@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
-                // edtEmail, edtPassword 텍스트 공백으롯 설정
+                // edtEmail, edtPassword 텍스트 공백으로 설정
                 edtEmail.setText("");
                 edtPassword.setText("");
             }
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = mAuth.getCurrentUser(); // 인스턴스를 가져온 mAuth로부터 현재 유저를 가져옴
                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    intent.putExtra("email", edtEmail.getText().toString());
                     startActivity(intent);
                 }
                 else {

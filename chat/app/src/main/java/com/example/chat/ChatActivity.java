@@ -58,8 +58,6 @@ public class ChatActivity extends AppCompatActivity {
         listChat.setLayoutManager(new LinearLayoutManager(this));
         listChat.setAdapter(chatAdapter);
 
-
-
         // 데이터베이스 가져오기
         database = FirebaseDatabase.getInstance();
 
